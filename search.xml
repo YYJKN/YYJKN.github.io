@@ -1,17 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>new</title>
-    <url>/2020/04/15/new/</url>
-    <content><![CDATA[<h3 id="你好"><a href="#你好" class="headerlink" title="你好"></a>你好</h3>]]></content>
-      <categories>
-        <category>前端</category>
-      </categories>
-      <tags>
-        <tag>-java -web</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>JavaScript 中的构造函数</title>
     <url>/2020/04/15/01.%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0/</url>
     <content><![CDATA[<p>JS里面没有类，构造函数是函数，this指向是个对象，所以this不能指向构造函数</p>
