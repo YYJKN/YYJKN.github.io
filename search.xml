@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>JavaScript 中的构造函数</title>
+    <title>01. JavaScript 中的构造函数</title>
     <url>/2020/04/15/01.%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0/</url>
     <content><![CDATA[<p>JS里面没有类，构造函数是函数，this指向是个对象，所以this不能指向构造函数</p>
 <h3 id="new-操作符的作用"><a href="#new-操作符的作用" class="headerlink" title="new 操作符的作用"></a>new 操作符的作用</h3><p>第一步： 创建一个Object对象实例</p>
@@ -33,7 +33,67 @@
         <category>javascript</category>
       </categories>
       <tags>
-        <tag>-javascript</tag>
+        <tag>javascript</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>02. let和const</title>
+    <url>/2020/04/16/02.let%20%E5%92%8Cconst%20%E5%91%BD%E4%BB%A4/</url>
+    <content><![CDATA[<h3 id="let-和const-命令"><a href="#let-和const-命令" class="headerlink" title="let 和const 命令"></a>let 和const 命令</h3><h4 id="1-1-let-命令"><a href="#1-1-let-命令" class="headerlink" title="1.1 let 命令"></a>1.1 let 命令</h4><p>let 声明的变量只在 let 命令所在的代码块内有效。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="keyword">let</span> a = <span class="number">10</span></span><br><span class="line">    <span class="keyword">var</span> b = <span class="number">1</span></span><br><span class="line">&#125;</span><br><span class="line">a <span class="comment">//  ReferenceError: a is not defined</span></span><br><span class="line">b <span class="comment">// 1</span></span><br></pre></td></tr></table></figure>
+
+   <figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">      a[i] = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(i)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">a[<span class="number">1</span>]() <span class="comment">// 1</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i =<span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">    a[i] = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(i)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">a[<span class="number">1</span>]() <span class="comment">// 10</span></span><br></pre></td></tr></table></figure>
+
+<p><code>let</code> 作用域只在 ｛｝ 内有效, <code>var</code>  作用域是全局</p>
+<h4 id="1-2-for-循环的作用域"><a href="#1-2-for-循环的作用域" class="headerlink" title="1.2 for 循环的作用域"></a>1.2 for 循环的作用域</h4><p>设置 for 循环的那部分是一个父作用域， 循环体内部是一个单独的子作用域。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> i =<span class="number">0</span>; i &lt; <span class="number">3</span>; i++) &#123;</span><br><span class="line">    <span class="keyword">let</span> i = a</span><br><span class="line">    <span class="built_in">console</span>.log(i)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 输出3次 a</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="1-3-不存在变量提升"><a href="#1-3-不存在变量提升" class="headerlink" title="1.3 不存在变量提升"></a>1.3 不存在变量提升</h4><p>var 声明的变量会存在变量提升现象, let 不存在此现象。</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// var</span></span><br><span class="line"><span class="built_in">console</span>.log(foo)  <span class="comment">// 输出underfined</span></span><br><span class="line"><span class="keyword">var</span> foo = <span class="number">2</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// let</span></span><br><span class="line"><span class="built_in">console</span>.log(bar)</span><br><span class="line"><span class="keyword">let</span> bar = <span class="number">3</span>      <span class="comment">// ReferenceError</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="1-4-不允许重复声明"><a href="#1-4-不允许重复声明" class="headerlink" title="1.4 不允许重复声明"></a>1.4 不允许重复声明</h4><p>let 不允许相同作用域内重复声明同一个变量</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> a = <span class="number">10</span></span><br><span class="line">    <span class="keyword">var</span> a = <span class="number">1</span> <span class="comment">// ReferenceError</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> a = <span class="number">10</span></span><br><span class="line">    <span class="keyword">let</span> a = <span class="number">1</span> <span class="comment">// ReferenceError</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>不能在函数内部重新声明参数</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span>(<span class="params">arg</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> arg <span class="comment">// ReferenceError</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span>(<span class="params">arg</span>) </span>&#123;</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">let</span> arg <span class="comment">// 不报错</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="1-5-暂时性死区-temporal-dead-zone-TDZ"><a href="#1-5-暂时性死区-temporal-dead-zone-TDZ" class="headerlink" title="1.5 暂时性死区(temporal dead zone, TDZ)"></a>1.5 暂时性死区(temporal dead zone, TDZ)</h4><p>只要块级作用域存在 let 命令，它所声明的变量就会 “绑定（binding）”这个区域， 不再受外部影响。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> tmp = <span class="number">123</span></span><br><span class="line"><span class="keyword">if</span>(<span class="literal">true</span>) &#123;</span><br><span class="line">    tmp = <span class="number">456</span>  <span class="comment">//ReferenceErroe</span></span><br><span class="line">    <span class="keyword">let</span> tmp </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>虽然存在全局变量，但是块级作用域 let 重新声明此变量，导致后者绑定了这个块级作用域， 所以在 let 声明变量前，对 tmp 赋值会报错。</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span>(<span class="literal">true</span>) &#123;</span><br><span class="line">    <span class="comment">// TDZ 开始</span></span><br><span class="line">    tmp = <span class="number">123</span>  <span class="comment">// ReferenecError</span></span><br><span class="line">    <span class="built_in">console</span>.log(tmp) <span class="comment">// ReferenecError</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">let</span> tmp <span class="comment">// TDZ 结束</span></span><br><span class="line">    <span class="built_in">console</span>.log(tmp) <span class="comment">// undefined</span></span><br><span class="line">    </span><br><span class="line">    tmp = <span class="number">456</span></span><br><span class="line">    <span class="built_in">console</span>.log(tmp) <span class="comment">// 456</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在 let 声明变量 tmp 之前， 都属于变量 tmp 的死区，无法进行赋值等操作。</p>
+<p><code>typeof of</code> 不再是一个百分百安全的操作。</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">typeof</span> x <span class="comment">// ReferenceError</span></span><br><span class="line"><span class="keyword">let</span> x</span><br><span class="line"><span class="comment">// let 声明的变量会直接报错</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typeof</span> undeclared_variable <span class="comment">// 'undefined' </span></span><br><span class="line"><span class="comment">// 未声明的变量会报 undefined</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="1-5-1-特殊死区"><a href="#1-5-1-特殊死区" class="headerlink" title="1.5.1 特殊死区"></a>1.5.1 特殊死区</h5><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">bar</span>(<span class="params">x = y, y = <span class="number">2</span></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> [x,y]</span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line">bar() <span class="comment">// ReferenceError  因为此时 y 没有声明，属于TDZ, 如果y的默认值是 x，就不会报错，因为x 已经声明</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">bar</span> (<span class="params">x = <span class="number">2</span>, y = x</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> [x,y]</span><br><span class="line">&#125;</span><br><span class="line">bar() <span class="comment">// [2,2]</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> x = x; <span class="comment">// 不报错</span></span><br><span class="line"><span class="keyword">let</span> x = x; <span class="comment">// ReferenceError: x is not defined</span></span><br><span class="line"><span class="comment">// 使用 let 声明的变量，只要变量在还没有声明前使用，就会报错。 在变量 x 声明前获取 x 的值会报错。</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="1-5-2-暂时性死区总结"><a href="#1-5-2-暂时性死区总结" class="headerlink" title="1.5.2 暂时性死区总结"></a>1.5.2 暂时性死区总结</h5><p>本质： 只要进行当前作用域，所要使用的变量已经存在，只有等到变量声明的哪一行代码出现，此变量才可以获取和使用。</p>
+<h3 id="const-命令"><a href="#const-命令" class="headerlink" title="const 命令"></a>const 命令</h3><h4 id="2-1-基本用法"><a href="#2-1-基本用法" class="headerlink" title="2.1 基本用法"></a>2.1 基本用法</h4><p><strong>const</strong> 声明一个常量，一旦声明，常量的值不可以改变</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> PI = <span class="number">3.14</span></span><br><span class="line">PI = <span class="number">3</span>  <span class="comment">//ReferenceError</span></span><br></pre></td></tr></table></figure>
+
+<p>*<em>const *</em>一旦声明，必须立刻赋值，不能留到以后赋值</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> foo   <span class="comment">//SyntaxError: Missing initializer in const declaration</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>const</strong> 和 <strong>let</strong>一样，是块级作用域，没有变量提升，存在<strong>暂时性死区</strong>，不能重复声明。</p>
+<h4 id="2-2-const-本质"><a href="#2-2-const-本质" class="headerlink" title="2.2 const 本质"></a>2.2 const 本质</h4><p><strong>const</strong> 实际上保证的是变量的内存地址不得改正，而不是只不能改动。对于简单的数据类型（数值，字符串，布尔值）而言，值就保存在变量指向的内存地址中，因此等同于常量。但对于复合型的数据（对象，数组）而言，变量指向的内存地址保存的只是一个指针， <strong>const</strong> 只能保证指针是固定的，它指定的数据结构是不是可变的，不能完全控制。</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> foo = &#123;&#125;</span><br><span class="line"><span class="comment">// 为 foo 添加一个属性，可以成功</span></span><br><span class="line">foo.prop = <span class="number">123</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 将 foo 指向另一个对象，会报错</span></span><br><span class="line">foo = &#123;&#125; <span class="comment">// TypeError: 'foo' is read-only</span></span><br></pre></td></tr></table></figure>
+
+<p>常量 foo 指向的是一个地址，这个地址指向的是一个对象，不变的只是地址，对象的属性可以改变。</p>
+]]></content>
+      <categories>
+        <category>javascript</category>
+      </categories>
+      <tags>
+        <tag>javascript</tag>
+        <tag>ES6</tag>
       </tags>
   </entry>
 </search>
