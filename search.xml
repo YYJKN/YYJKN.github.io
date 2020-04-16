@@ -61,6 +61,42 @@
       </tags>
   </entry>
   <entry>
+    <title>01. JavaScript 中的构造函数</title>
+    <url>/2020/04/15/01.%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0/</url>
+    <content><![CDATA[<p>JS里面没有类，构造函数是函数，this指向是个对象，所以this不能指向构造函数</p>
+<h3 id="new-操作符的作用"><a href="#new-操作符的作用" class="headerlink" title="new 操作符的作用"></a>new 操作符的作用</h3><p>第一步： 创建一个Object对象实例</p>
+<p>第二步： 将构造函数的执行对象赋给这个Object实例</p>
+<p>第三步： 执行构造函数中的代码</p>
+<p>第四步： 返回新生成的对象实例</p>
+<p> <strong>注意：</strong>原本的构造函数是window对象的方法，如果不用new操作符而直接调用，那么构造函数的执行对象就 是window，即this指向了window。现在用new操作符后，this就指向了新生成的对象。理解这一步至关重要。<br>执行构造函数中的代码，看代码： </p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">            <span class="keyword">this</span>.name = <span class="string">"Tiny Colder"</span>;</span><br><span class="line">            <span class="keyword">var</span> age = <span class="number">22</span>;</span><br><span class="line">            <span class="built_in">window</span>.age = <span class="number">22</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">var</span> p = <span class="keyword">new</span> Person();</span><br><span class="line">        alert(p.name)<span class="comment">//Tiny Colder;</span></span><br><span class="line">        alert(p.age)<span class="comment">//undefined;</span></span><br><span class="line">        alert(<span class="built_in">window</span>.age)<span class="comment">//22;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">当用==<span class="keyword">new</span>==操作符创建对象时，先创建一个对象实例，任何执行代码</span><br><span class="line"><span class="keyword">var</span> p = <span class="keyword">new</span> Person()</span><br><span class="line">执行 <span class="keyword">this</span>.name = <span class="string">"Tiny Colder"</span>;</span><br><span class="line">p.name = <span class="string">"Tiny Colder"</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> age = <span class="number">22</span> 会执行，对新对象无影响</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">            <span class="keyword">this</span>.name = <span class="string">"Tiny Colder"</span>;</span><br><span class="line">            <span class="keyword">return</span> &#123;&#125;;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">var</span> p = <span class="keyword">new</span> Person();</span><br><span class="line">        alert(p.name)<span class="comment">//undefined;</span></span><br><span class="line">原文链接：https:<span class="comment">//blog.csdn.net/mym940725/java/article/details/79101030</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>显式的返回以下值：undefined, null, boolean, number等基础类型，并不会代替 new 式调用的默认行为。</p>
+<p>但显式返回以下值：{},[],RegExp, Date, Function，均会代替 new 调用的默认返回值 this.</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> p = <span class="keyword">new</span> Person()</span><br><span class="line"><span class="keyword">var</span> p = <span class="keyword">new</span> <span class="built_in">Object</span>()</span><br><span class="line">Person.call(p)</span><br></pre></td></tr></table></figure>
+
+
+
+
+]]></content>
+      <categories>
+        <category>javascript</category>
+      </categories>
+      <tags>
+        <tag>javascript</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>02. let和const</title>
     <url>/2020/04/16/02.let%20%E5%92%8Cconst%20%E5%91%BD%E4%BB%A4/</url>
     <content><![CDATA[<h3 id="let-和const-命令"><a href="#let-和const-命令" class="headerlink" title="let 和const 命令"></a>let 和const 命令</h3><h4 id="1-1-let-命令"><a href="#1-1-let-命令" class="headerlink" title="1.1 let 命令"></a>1.1 let 命令</h4><p>let 声明的变量只在 let 命令所在的代码块内有效。</p>
@@ -118,42 +154,6 @@
       <tags>
         <tag>javascript</tag>
         <tag>ES6</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>01. JavaScript 中的构造函数</title>
-    <url>/2020/04/15/01.%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0/</url>
-    <content><![CDATA[<p>JS里面没有类，构造函数是函数，this指向是个对象，所以this不能指向构造函数</p>
-<h3 id="new-操作符的作用"><a href="#new-操作符的作用" class="headerlink" title="new 操作符的作用"></a>new 操作符的作用</h3><p>第一步： 创建一个Object对象实例</p>
-<p>第二步： 将构造函数的执行对象赋给这个Object实例</p>
-<p>第三步： 执行构造函数中的代码</p>
-<p>第四步： 返回新生成的对象实例</p>
-<p> <strong>注意：</strong>原本的构造函数是window对象的方法，如果不用new操作符而直接调用，那么构造函数的执行对象就 是window，即this指向了window。现在用new操作符后，this就指向了新生成的对象。理解这一步至关重要。<br>执行构造函数中的代码，看代码： </p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">            <span class="keyword">this</span>.name = <span class="string">"Tiny Colder"</span>;</span><br><span class="line">            <span class="keyword">var</span> age = <span class="number">22</span>;</span><br><span class="line">            <span class="built_in">window</span>.age = <span class="number">22</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">var</span> p = <span class="keyword">new</span> Person();</span><br><span class="line">        alert(p.name)<span class="comment">//Tiny Colder;</span></span><br><span class="line">        alert(p.age)<span class="comment">//undefined;</span></span><br><span class="line">        alert(<span class="built_in">window</span>.age)<span class="comment">//22;</span></span><br></pre></td></tr></table></figure>
-
-
-
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">当用==<span class="keyword">new</span>==操作符创建对象时，先创建一个对象实例，任何执行代码</span><br><span class="line"><span class="keyword">var</span> p = <span class="keyword">new</span> Person()</span><br><span class="line">执行 <span class="keyword">this</span>.name = <span class="string">"Tiny Colder"</span>;</span><br><span class="line">p.name = <span class="string">"Tiny Colder"</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> age = <span class="number">22</span> 会执行，对新对象无影响</span><br></pre></td></tr></table></figure>
-
-
-
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">            <span class="keyword">this</span>.name = <span class="string">"Tiny Colder"</span>;</span><br><span class="line">            <span class="keyword">return</span> &#123;&#125;;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">var</span> p = <span class="keyword">new</span> Person();</span><br><span class="line">        alert(p.name)<span class="comment">//undefined;</span></span><br><span class="line">原文链接：https:<span class="comment">//blog.csdn.net/mym940725/java/article/details/79101030</span></span><br></pre></td></tr></table></figure>
-
-
-
-<p>显式的返回以下值：undefined, null, boolean, number等基础类型，并不会代替 new 式调用的默认行为。</p>
-<p>但显式返回以下值：{},[],RegExp, Date, Function，均会代替 new 调用的默认返回值 this.</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> p = <span class="keyword">new</span> Person()</span><br><span class="line"><span class="keyword">var</span> p = <span class="keyword">new</span> <span class="built_in">Object</span>()</span><br><span class="line">Person.call(p)</span><br></pre></td></tr></table></figure>
-
-
-
-
-]]></content>
-      <categories>
-        <category>javascript</category>
-      </categories>
-      <tags>
-        <tag>javascript</tag>
       </tags>
   </entry>
 </search>
